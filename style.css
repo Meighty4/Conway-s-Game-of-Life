@@ -1,5 +1,5 @@
 :root {
-  --game_dimentions: 30;
+  --game_dimention: 30;
   --cell_dimention: 10px;
   --grid_gap: calc(var(--cell_dimention)*0.30);
   --default_cel_color: #ffffff;
@@ -10,7 +10,7 @@
 *{
   margin: 0;
   padding: 0;
-  box-sizing: 0;
+  box-sizing: border-box;
 }
 
 body{
@@ -22,11 +22,11 @@ body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: lightblue;
+  background-color: rgb(230, 173, 173);
   border-radius: 10px;
   padding: 30px;
-  width: calc(var(--game_dimentions)*(var(--cell_dimention)+var(--grid_gap)));
-  height: calc(var(--game_dimentions)*(var(--cell_dimention)+var(--grid_gap)));
+  width: calc(var(--game_dimention)*(var(--cell_dimention)+var(--grid_gap)));
+  height: calc(var(--game_dimention)*(var(--cell_dimention)+var(--grid_gap)));
 
 }
 
@@ -50,8 +50,8 @@ h1 {
 }
 
 .cell {
-  width: 100%;
-  height: 100%;
+  width: var(--cell_dimention);
+  height: var(--cell_dimention);
   background-color:var(--default_cel_color);
   border-radius: 3px;
 
@@ -60,8 +60,8 @@ h1 {
 #grid {
   display: grid;
   gap: var(--grid_gap);
-  grid-template-columns: repeat(var(--game_dimentions), var(--cell_dimention));
-  grid-template-rows:repeat(var(--game_dimentions), var(--cell_dimention));
+  grid-template-columns: repeat(var(--game_dimention), var(--cell_dimention));
+  grid-template-rows:repeat(var(--game_dimention), var(--cell_dimention));
 }
 
 .button-5{
