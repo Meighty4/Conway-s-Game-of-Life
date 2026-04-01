@@ -1,0 +1,115 @@
+:root {
+  --game_dimentions: 30;
+  --cell_dimention: 10px;
+  --grid_gap: calc(var(--cell_dimention)*0.30);
+  --default_cel_color: #ffffff;
+  --alive_cell_color: #000000;
+
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+}
+
+body{
+  background-color: darkgray;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: lightblue;
+  border-radius: 10px;
+  padding: 30px;
+  width: calc(var(--game_dimentions)*(var(--cell_dimention)+var(--grid_gap)));
+  height: calc(var(--game_dimentions)*(var(--cell_dimention)+var(--grid_gap)));
+
+}
+
+section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+
+  flex-direction: column;
+
+}
+
+h1 {
+  color:aqua;
+  letter-spacing: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 50px;
+  text-align: center;
+}
+
+.cell {
+  width: 100%;
+  height: 100%;
+  background-color:var(--default_cel_color);
+  border-radius: 3px;
+
+}
+
+#grid {
+  display: grid;
+  gap: var(--grid_gap);
+  grid-template-columns: repeat(var(--game_dimentions), var(--cell_dimention));
+  grid-template-rows:repeat(var(--game_dimentions), var(--cell_dimention));
+}
+
+.button-5{
+  align-items: center;
+  background-clip: padding-box;
+  background-color:cornflowerblue;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  box-shadow: rgba( 0,0,0,0,0.03) 0 1px 3px 0;
+  box-sizing: border-box;
+  color:antiquewhite;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 30px;
+  min-height: 48px;
+  padding: calc(0.9rem -1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-5:hover, .button-5:focus{
+  box-shadow: rgba( 0,0,0,0,0.03) 0 4px 12px;
+}
+
+.button-5:hover{
+  transform: translateY(-1px);
+
+}
+
+.button-5:active{
+  background-color: aqua;
+  box-shadow: rgba( 0,0,0,0,0.06) 0 2px 4px;
+  transform:translateY(0);
+
+}
+
+.active{
+  background-color: blueviolet;
+  
+}
