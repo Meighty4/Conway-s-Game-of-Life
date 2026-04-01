@@ -1,9 +1,9 @@
 :root {
   --game_dimention: 30;
   --cell_dimention: 10px;
-  --grid_gap: calc(var(--cell_dimention)*0.30);
-  --default_cel_color: #ffffff;
-  --alive_cell_color: #000000;
+  --grid_gap: calc(var(--cell_dimention)*0.3);
+  --default_cel_color: #71bf48;
+  --alive_cell_color: #ffffff;
 
 }
 
@@ -14,7 +14,7 @@
 }
 
 body{
-  background-color: darkgray;
+  background-color: rgb(243, 216, 171);
 }
 
 .container{
@@ -22,9 +22,9 @@ body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(230, 173, 173);
+  background-color: rgb(203, 247, 133);
   border-radius: 10px;
-  padding: 30px;
+  padding: 10px;
   width: calc(var(--game_dimention)*(var(--cell_dimention)+var(--grid_gap)));
   height: calc(var(--game_dimention)*(var(--cell_dimention)+var(--grid_gap)));
 
@@ -42,9 +42,10 @@ section{
 }
 
 h1 {
-  color:aqua;
+  color:#fafffd;
   letter-spacing: 4px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: bolder;
   margin: 50px;
   text-align: center;
 }
@@ -53,7 +54,7 @@ h1 {
   width: var(--cell_dimention);
   height: var(--cell_dimention);
   background-color:var(--default_cel_color);
-  border-radius: 3px;
+  border-radius: 2px;
 
 }
 
@@ -68,7 +69,7 @@ h1 {
   align-items: center;
   background-clip: padding-box;
   background-color:cornflowerblue;
-  border: 1px solid transparent;
+  border: 5px solid transparent;
   border-radius: 2px;
   box-shadow: rgba( 0,0,0,0,0.03) 0 1px 3px 0;
   box-sizing: border-box;
@@ -82,7 +83,7 @@ h1 {
   line-height: 1.25;
   margin: 30px;
   min-height: 48px;
-  padding: calc(0.9rem -1px) calc(1.5rem - 1px);
+  padding: calc(0.9rem) calc(1.5rem);
   position: relative;
   text-decoration: none;
   transition: all 250ms;
@@ -110,6 +111,11 @@ h1 {
 }
 
 .active{
-  background-color: blueviolet;
+  background-color: rgb(255, 255, 255);
+  
+}
+
+.active_btn{
+  background-color: rgb(66, 249, 255);
   
 }
