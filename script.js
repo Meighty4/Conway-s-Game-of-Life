@@ -1,7 +1,8 @@
-var gameDimention = getComputedStyle(document.body).getPropertyValue("--game_dimention");
+let gameDimention = parseInt(getComputedStyle(document.body).getPropertyValue("--game_dimention"));
 console.log(gameDimention);
 
 let grid = document.getElementById('grid');
+let isLooping = false;
 
 for(let i = 0; i<gameDimention*gameDimention; i++){
   var cellDiv = document.createElement('div');
@@ -9,7 +10,7 @@ for(let i = 0; i<gameDimention*gameDimention; i++){
   cellDiv.addEventListener('click',function(){
     if(this.classList.contains('active')){
       this.classList.remove('active');
-    } else { this.classList.add('active')}
+    } else { this.classList.add('active');}
   })
 
   grid.appendChild(cellDiv);
@@ -30,6 +31,21 @@ playButton.addEventListener('click',function(){
     this.innerText = "Pause";
   }
 });
+
+let loopButton = document.getElementById('loopToggle');
+
+loopButton.addEventListener('click',function(){
+  isLooping = !isLooping;
+  console.log("Looping:", isLooping);
+  if(isLooping){
+    this.innerText = "Borderless : ON";
+    this.classList.add("active_btn");
+  }else{
+    this.innerText = "Borderless : OFF";
+    this.classList.remove("active_btn");
+  }
+});
+
 
 function executeTimeStep(){
   let cells = Array.from(document.getElementsByClassName('cell'));
@@ -77,45 +93,29 @@ function toOneDimentionIndex(row, col, gameDimention){
 }
 
 function getActiveNeighborCount(cells, row, col, gameDimention){
-  if(row<0 || row >= gameDimention || col<0 || col>= gameDimention){
-    throw 'row or col values out of index';
-  }
+  let count = 0;
 
-  cells.forEach(element =>{
-    if(!element.classList.contains('cell')){
-      throw 'at least on of the cells doesnt contain the "cell" class';
+  for(let drow = -1; drow<=1; drow++){
+    for(let dcol = -1; dcol<=1; dcol++){
+      if( drow === 0 && dcol === 0){continue;}
+
+      let newRow = row + drow;
+      let newCol = col + dcol;
+
+      if(isLooping){
+        newRow = (newRow + gameDimention) % gameDimention;
+        newCol = (newCol + gameDimention) % gameDimention;
+      }else{
+        if(newCol < 0 || newCol>= gameDimention|| newRow < 0 || newRow >= gameDimention){
+          continue;
+        }
+      }
+
+      let index = toOneDimentionIndex(newRow, newCol,gameDimention);
+
+      if(cells[index].classList.contains("active")){count++;}
     }
-  })
-
-  if(cells.length != gameDimention*gameDimention){
-    throw 'invalid cells length';
   }
-
-  var count = 0;
-
-  if(row - 1>=0 && cells[toOneDimentionIndex(row-1,col,gameDimention)].classList.contains('active')){
-    count +=1;
-  }
-  if(row-1>=0 && col+1< gameDimention && cells[toOneDimentionIndex(row-1,col+1,gameDimention)].classList.contains('active')){
-    count +=1;
-  }
-  if(col+1<gameDimention && cells[toOneDimentionIndex(row,col+1,gameDimention)].classList.contains('active')){
-    count +=1;
-  }
-  if(row+1<gameDimention && col+1<gameDimention && cells[toOneDimentionIndex(row+1,col+1,gameDimention)].classList.contains('active')){
-    count+=1;
-  }
-  if(row+1<gameDimention && cells[toOneDimentionIndex(row+1,col,gameDimention)].classList.contains('active')){
-    count+=1;
-  }
-  if(row+1<gameDimention && col-1>=0 && cells[toOneDimentionIndex(row+1,col-1,gameDimention)].classList.contains('active')){
-    count+=1;
-  }
-  if(col-1>=0 && cells[toOneDimentionIndex(row,col-1,gameDimention)].classList.contains('active')){
-    count+=1;
-  }
-  if(col-1>=0 && row-1>=0 && cells[toOneDimentionIndex(row-1,col-1,gameDimention)].classList.contains('active')){
-    count+=1;
-  }
+ 
   return count;
 }
